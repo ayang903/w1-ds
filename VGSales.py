@@ -7,7 +7,6 @@ from plotly.subplots import make_subplots
 
 st.title('Video Game Sales Analysis')
 st.write('Using a dataset from Kaggle, we made graphs and charts of Video game sales. This is what our dataset looks like.')
-st.write('this is a test')
 
 df = pd.read_csv('vgsales.csv')
 #cleaning nulls
@@ -17,6 +16,13 @@ df.dropna(inplace=True)
 # df = df.rename(columns={'NA_Sales': 'NA Sales (Millions)', 'EU_Sales': 'EU Sales (Millions)', 'JP_Sales': 'JP Sales (Millions)', 'Other_Sales': 'Other Sales (Millions)', 'Global_Sales': 'Global Sales (Millions)'}, inplace = True)
 temp = df.head(25)
 st.dataframe(df.head())
+
+#scatter matrix
+fig = px.scatter_matrix(df,
+                  dimensions=['NA_Sales','EU_Sales','JP_Sales','Global_Sales'],
+                  width = 1000,
+                  height = 1000)
+st.plotly_chart(fig)
 
 #sales histograms
 region = st.selectbox('Choose the region', options=['NA_Sales', 'EU_Sales', 'JP_Sales', 'Other_Sales','Global_Sales'], key=1)
@@ -41,7 +47,7 @@ st.plotly_chart(fig)
 #use st.selectionbox to have the user select a sales region
 # generalize the following code, to work with the selected region
 # graphing the selected region
-
+st.write('Using the dataset, I created bar charts of the top 25 most popular games per region and their sales.')
 region = st.selectbox('Choose your region', options=['NA_Sales', 'EU_Sales', 'JP_Sales', 'Other_Sales','Global_Sales'])
 
 # UStemp = temp.sort_values('NA_Sales', ascending=False)
@@ -120,6 +126,7 @@ def total_Sale(average_sales_sorted):
 
 fig = total_Sale(average_sales.sort_values('Global_Sales'))
 st.plotly_chart(fig)
+st.write("In the following sitution, the y-axis will be the sale for each platform, and x-axis will be different type of platform. And the graph will shows sales from left to right as increasing order.")
 # fig.show()
 
 # Video game yearly sales (line chart)
@@ -158,7 +165,7 @@ listofgenres = ['Platform', 'Shooter', 'Role-Playing', 'Racing']
 # listofgenres = st.selectbox("Select Genre:", options=['Platform', 'Shooter', 'Role-Playing', 'Racing'])
 
 # Sales of different genres
-st.write('In the Shooter genre, the 3rd game in the top 3 is not Call of Duty: Black Ops because that game made less than Call of Duty: Blacks Ops 2 bbecause COD: Black Ops 2 made more money on the multiple consoles it was released on. Multiple games in that genre have two sets of sales stacked upon another.. The top game in the Platform genre made more money than the top games in the other 3 genres. The top 2 games in each genre have a wide gap, however, the top 2 games in the Shooter genre have similar sales. The top genre overall makes more money than the other genres.')
+st.write('The top game in the Platform genre made more money than the top games in the other 3 genres. The top 2 games in each genre have a wide gap, however, the top 2 games in the Shooter genre have similar sales. The top genre overall makes more money than the other genres.')
 fig = make_subplots(rows=2, cols=2, vertical_spacing=0.16)
 row=1
 col=1
@@ -185,13 +192,7 @@ st.plotly_chart(fig)
 
 
 
-# consoles = df.groupby('Platform').count()
-# px.pie(consoles, values='Global_Sales', names=consoles.index)
 
-# px.scatter_matrix(df,
-#                   dimensions=['NA_Sales','EU_Sales','JP_Sales','Global_Sales'],
-#                   width = 1000,
-#                   height = 1000)
 
 st.write('Estefanny - I created different types of charts(Pie, scatter, and histogram) based on diferent Video game sales from paticular places, which are North America, Japan, United Kingdom, globally.  ')
 
