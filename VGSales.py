@@ -90,6 +90,7 @@ st.plotly_chart(fig)
 
 consoles = df.groupby('Platform').count()
 fig = px.pie(consoles, values='Global_Sales', names=consoles.index, title='Most popular consoles')
+fig.update_traces(textposition='inside', textinfo='percent+label')
 st.plotly_chart(fig)
 
 
