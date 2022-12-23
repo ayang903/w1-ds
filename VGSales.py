@@ -7,6 +7,7 @@ from plotly.subplots import make_subplots
 
 st.title('Video Game Sales Analysis')
 st.write('Using a dataset from Kaggle, we made graphs and charts of Video game sales.')
+st.write('this is a test')
 
 df = pd.read_csv('vgsales.csv')
 #cleaning nulls
