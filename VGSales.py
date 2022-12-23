@@ -19,9 +19,10 @@ st.dataframe(df.head())
 
 #scatter matrix
 fig = px.scatter_matrix(df,
-                  dimensions=['NA_Sales','EU_Sales','JP_Sales','Global_Sales'],
+                  dimensions=['NA_Sales','EU_Sales','JP_Sales', 'Other_Sales', 'Global_Sales'],
                   width = 1000,
-                  height = 1000)
+                  height = 1000,
+                  title='Scatter matrix of sales')
 st.plotly_chart(fig)
 
 #sales histograms
@@ -88,7 +89,7 @@ st.plotly_chart(fig)
 # Wstreamlit = st.plotly_chart(WSales)
 
 consoles = df.groupby('Platform').count()
-fig = px.pie(consoles, values='Global_Sales', names=consoles.index)
+fig = px.pie(consoles, values='Global_Sales', names=consoles.index, title='Most popular consoles')
 st.plotly_chart(fig)
 
 
@@ -108,7 +109,7 @@ def total_Sale(average_sales_sorted):
 
 
     # fig with highest number of 'Global_Sales'
-    fig = px.scatter(average_sales_sorted, x = index, y = gobal_Sales, title = 'Platform Sales')
+    fig = px.line(average_sales_sorted, x = index, y = gobal_Sales, title = 'Platform Sales')
 
     # adding data in
     fig.add_scatter(x=index, y=gobal_Sales, mode='lines+markers', name = "Gobal Sales")
